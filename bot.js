@@ -33,7 +33,7 @@ client.on('message', async msg =>{
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 
-    if(command === `ping`) {
+    if(command === `Gping`) {
     let embed = new Discord.RichEmbed()
     .setColor(3447003)
     .setTitle("Pong!!")
@@ -55,7 +55,7 @@ client.on('message', async msg =>{
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 
-    if(command === `avatar`){
+    if(command === `Gavatar`){
 	if(msg.channel.type === 'dm') return msg.channel.send("Nope Nope!! u can't use avatar command in DMs (:")
         let mentions = msg.mentions.members.first()
         if(!mentions) {
@@ -99,9 +99,9 @@ client.on('message', async msg => {
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 
-	if (command === `play`) {
+	if (command === `Gplay`) {
 		const voiceChannel = msg.member.voiceChannel;
-        
+       
         if (!voiceChannel) return msg.channel.send("I can't find you in any voice channel!");
         
         const permissions = voiceChannel.permissionsFor(msg.client.user);
@@ -179,7 +179,7 @@ client.on('message', async msg => {
             
         }
         
-	} else if (command === `skip`) {
+	} else if (command === `Gskip`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
         if (!serverQueue) return msg.channel.send("There is no Queue to skip!!");
@@ -187,7 +187,7 @@ client.on('message', async msg => {
 		serverQueue.connection.dispatcher.end('Ok, skipped!');
         return undefined;
         
-	} else if (command === `stop`) {
+	} else if (command === `Gstop`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
         if (!serverQueue) return msg.channel.send("There is no Queue to stop!!");
@@ -196,7 +196,7 @@ client.on('message', async msg => {
 		serverQueue.connection.dispatcher.end('Ok, stopped & disconnected from your Voice channel');
         return undefined;
         
-	} else if (command === `vol`) {
+	} else if (command === `Gvol`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
 		if (!serverQueue) return msg.channel.send('You only can use this command while music is playing!');
@@ -207,14 +207,14 @@ client.on('message', async msg => {
         
         return msg.channel.send(`Volume Now is **${args[1]}**`);
 
-	} else if (command === `np`) {
+	} else if (command === `Gnp`) {
 
 		if (!serverQueue) return msg.channel.send('There is no Queue!');
 		const embedNP = new Discord.RichEmbed()
 	    .setDescription(`Now playing **${serverQueue.songs[0].title}**`)
         return msg.channel.sendEmbed(embedNP);
         
-	} else if (command === `queue`) {
+	} else if (command === `Gqueue`) {
 		
 		if (!serverQueue) return msg.channel.send('There is no Queue!!');
 		let index = 0;
@@ -226,14 +226,14 @@ client.on('message', async msg => {
 **Now playing :** **${serverQueue.songs[0].title}**`)
         .setColor("#f7abab")
 		return msg.channel.sendEmbed(embedqu);
-	} else if (command === `pause`) {
+	} else if (command === `Gpause`) {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
 			return msg.channel.send('Ok, paused');
 		}
 		return msg.channel.send('There is no Queue to Pause!');
-	} else if (command === "resume") {
+	} else if (command === "Gresume") {
 
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
@@ -313,19 +313,19 @@ function play(guild, song) {
 
 
 client.on('message', message => {
-    if (message.content === 'help') {
+    if (message.content === 'Ghelp') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر الميوزك...**')
-        .setDescription('**برفكس البوت (!)**')
-        .addField('play', 'لتشغيل اغنية')
-        .addField('join', 'دخول رومك الصوتي')
-        .addField('disconnect', 'الخروج من رومك الصوتي')
-        .addField('skip', 'تخطي الأغنية')
-        .addField('pause', 'ايقاف الاغنية مؤقتا')
-        .addField('resume', 'تكملة الاغنية')
-        .addField('queue', 'اظهار قائمة التشغيل')
-        .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
-        .setFooter('(general_commands) لاظهار الاوامر العامة')
+        .setDescription('**برفكس البوت (G)**')
+        .addField('Gplay', 'لتشغيل اغنية')
+        .addField('Gjoin', 'دخول رومك الصوتي')
+        .addField('Gdisconnect', 'الخروج من رومك الصوتي')
+        .addField('Gskip', 'تخطي الأغنية')
+        .addField('Gpause', 'ايقاف الاغنية مؤقتا')
+        .addField('Gresume', 'تكملة الاغنية')
+        .addField('Gqueue', 'اظهار قائمة التشغيل')
+        .addField('Gnp', 'اظهار الاغنية اللي انت مشغلها حاليا')
+        .setFooter('Ggeneral_commands لاظهار الاوامر العامة')
       message.channel.send(helpEmbed);
     }
 });
@@ -334,9 +334,9 @@ client.on('message', message => {
     if (message.content === 'general_commands') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر عامة...**')
-        .addField('avatar', "افاتار الشخص المطلوب")
-        .addField('gif', 'البحث عن جيف انت تطلبه')
-        .addField('ping', 'معرفة ping البوت')
+        .addField('Gavatar', "افاتار الشخص المطلوب")
+        .addField('Ggif', 'البحث عن جيف انت تطلبه')
+        .addField('Gping', 'معرفة ping البوت')
         .setFooter('المزيد قريبا ان شاء الله!')
       message.channel.send(helpEmbed);
     }
